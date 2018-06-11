@@ -1,0 +1,179 @@
+<script>
+{
+  if (!window.CUSTOM_UI_LIST) window.CUSTOM_UI_LIST = [];
+  window.CUSTOM_UI_LIST.push({
+    name: '电视遥控器自定义详情页UI-by:Qinver',
+    url: 'https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv',
+    version: '20180612'
+  });
+}
+</script>
+<dom-module id="more-info-qinver-tv"><template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">
+</style>
+<style>
+      paper-button-group {   
+        background: rgb(199,111,0,0);       
+        padding: 0;
+        margin: auto;
+        margin-right: 0px;
+      }
+      #quyu {
+       margin: 0 -22px;     
+      }
+      paper-button {  
+        text-align:center;
+        padding: 1px;
+        min-width: 36px;
+        height: 36px;
+        border-radius:50%;
+        margin: 0;
+        color: var(--button-color, var(--primary-text-color));
+      }
+      #kuang {
+        width: 90%;
+        height: 260px;
+        opacity:0.2;
+        text-align: center;
+        border-radius:15px;
+        margin: 15px auto;     
+        border: 0.1em solid var(--primary-text-color); 
+      }
+      #wz,#ts,#ts:hover,#wz:hover {
+        cursor:default;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -ms-user-select:none;
+         user-select:none;
+      }       
+      #wz1 {
+        margin-top: 80px;
+        font-size: 16px;
+        margin-right: -10px;
+        letter-spacing: 16px;
+        margin-bottom: 10px;
+      }
+      #wz2 {
+        font-size: 12px;
+        opacity: var(--ts-opacity);
+        transition: 5s;
+      }
+      #ts,#ts1 {
+        opacity: var(--ts-opacity);
+        transition: 20s;
+      }
+      #ts {
+        margin-top: 20px;
+        font-size: 12px;
+      }
+</style>
+<div class='horizontal justified layout button-groupa'>
+    <paper-button-group>
+        <template is="dom-repeat" items="[[entities.buttons]]" as="entity">
+            <paper-button style$="[[computeTileStyle(hass, entity)]]" on-tap="buttoncall">
+                <iron-icon icon="[[entity.icon]]"></iron-icon>
+            </paper-button>
+        </template>
+    </paper-button-group>
+</div>
+<paper-button-group id="quyu" on-track="handleTrack" class='horizontal justified layout'>
+    <div id="kuang">
+        <div id="wz">
+            <div id="wz1">滑动触控区</div>
+            <div id="wz2">轻滑：ok键</div>
+            <div id="wz2">中滑：方向键</div>
+            <div id="wz2">左长滑：主页键</div>
+            <div id="wz2">右长滑：返回键</div>
+            <div id="ts">{{c}}</div>
+            <div id="ts1">{{d}}</div>
+        </div>
+    </div>
+</paper-button-group>
+</template></dom-module>
+<script>
+  Polymer({
+    is: 'more-info-qinver-tv',
+    properties: {
+      hass: {
+        type: Object,
+      },
+      stateObj: {
+        type: Object,
+      },  
+      entities: {
+        type: Object,
+        computed: 'computeentities(stateObj)',
+      },
+    },
+    computeentities: function (stateObj) {
+      return stateObj.attributes.entities;
+    },
+    computeTileStyle: function (hass, entity) {
+      on = 'color: var(--paper-toggle-button-checked-button-color)'
+      off = 'color: var(--primary-text-color)'
+      return (hass.states[entity.entity].state === 'on') ? on : off;
+    },
+      handleTrack: function(e) {
+        var entities = this.entities,
+            sb = entities.up ? entities.up : '未设置ID'
+            xb = entities.down ? entities.down : '未设置ID'
+            zb = entities.left ? entities.left : '未设置ID'
+            yb = entities.right ? entities.right : '未设置ID'
+            ob = entities.ok ? entities.ok : '未设置ID'
+            hb = entities.home ? entities.home : '未设置ID'
+            fb = entities.back ? entities.back : '未设置ID';
+        switch(e.detail.state) {
+          case 'end':
+          var x = e.detail.dx,
+              y = e.detail.dy;
+              jd = Math.atan2(x, y) * 180 / Math.PI
+        if (Math.abs(x) < 40 && Math.abs(y) < 40) {  
+            fx = ob;xs = 'ok：'+ ob; 
+        } else if (Math.abs(x) > 40 || Math.abs(y) > 40) {
+        if (jd >= -135 && jd <= -45) {  
+           if (Math.abs(x) < 200) {
+            fx = zb;xs = '左：'+ zb; 
+           } else if (Math.abs(x) > 200) {
+            fx = hb;xs = '主页：'+ hb; 
+           } 
+        } else if (jd > 45 && jd < 135) {  
+           if (Math.abs(x) < 200) {
+            fx = yb;xs = '右：'+ yb; 
+           } else if (Math.abs(x) > 200) {
+            fx = fb;xs = '返回：'+ fb; 
+           }          
+        } else if ((jd >= 135 && jd <= 180) || (jd >= -180 && jd < -135)) {  
+            fx = sb;xs = '上：'+ sb; 
+        } else if (jd >= -45 && jd <= 45) {  
+            fx = xb;xs = '下：'+ xb;   
+        }}
+      this.updateStyles({
+        '--ts-opacity': '0',
+      });
+       /*   this.c = Math.abs(x) + ' / ' + Math.abs(y);  */
+          this.d = xs;
+          if (fx != '未设置ID') {
+          this.callService(fx)
+        }
+            break;
+        };
+      },
+    buttoncall: function (e){
+        var id = e.model.entity.entity;
+        this.callService(id)
+    },
+    callService: function (ev) {
+      var entity = ev;
+      var domain = entity.split('.')[0];
+      if (domain === 'script') {
+        var service = entity.split('.')[1];
+        var data = {};
+      } else {
+        var service = ev.service ? ev.split('.')[1] : 'toggle';
+        var data = { 'entity_id': ev };
+      }       
+      this.hass.callService(domain,service,data);
+     /* console.log('(' + domain + ',' + service + ',' + data + ')'); */
+    },
+  });
+</script>

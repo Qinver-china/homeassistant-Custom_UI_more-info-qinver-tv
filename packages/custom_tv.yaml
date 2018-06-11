@@ -1,0 +1,87 @@
+#frontend:
+#  javascript_version: auto
+#  extra_html_url:
+#    - /local/custom_ui/more-info-qinver-tv.html
+#  extra_html_url_es5:
+#    - /local/custom_ui/more-info-qinver-tv.html
+###以上是将custom_ui的文件加入到HA中的格式!请在对应位置添加！！
+    
+input_boolean:
+  boolean_tvceshi1:
+  boolean_tvceshi2:
+  boolean_tvceshi3:
+  boolean_tvceshi4:
+  boolean_tvceshi5:
+  boolean_tvceshi6:
+  boolean_tvceshi7:
+  boolean_tvceshi8:
+
+##上面这部分仅仅用于举例测试用。没有实际功能。
+    
+#下面是一个完整的配置写法
+homeassistant:
+  customize:
+    input_boolean.boolean_tvceshi1:       #假设这是我的电视开关ID
+      friendly_name: 电视遥控器
+      icon: mdi:television-guide
+      custom_ui_more_info: more-info-qinver-tv   ##使用此自定义详情页面
+      entities:               #以下是触控滑动功能的ID
+        menu: script.bl_cmcc_hezi_menu
+        home: script.bl_cmcc_hezi_home
+        back: script.bl_cmcc_hezi_back
+        up: script.bl_cmcc_hezi_shang
+        down: script.bl_cmcc_hezi_xia
+        left: script.bl_cmcc_hezi_zuo
+        right: script.bl_cmcc_hezi_you
+        ok: script.bl_cmcc_hezi_ok
+        buttons:             #除了触控区，你还需要增加的按钮。请一起填写icon
+          - entity: input_boolean.boolean_tvceshi1
+            icon: mdi:skip-previous-circle-outline
+          - entity: input_boolean.boolean_tvceshi2
+            icon: mdi:skip-next-circle-outline
+          - entity: input_boolean.boolean_tvceshi3
+            icon: mdi:format-list-bulleted
+          - entity: input_boolean.boolean_tvceshi4
+            icon: mdi:backup-restore
+
+##自定义UI和自定义详情页面也以同时使用，下面是一个使用自定义按钮和自定义详情页的例子
+##下面示例需要安装 自定义按钮ui ：state-card-button.html
+##自定义按钮的项目地址：https://github.com/Qinver-china/homeassistant-Custom_UI.state-card-button
+    input_boolean.boolean_tvceshi6:
+      friendly_name: 电视遥控器
+      icon: mdi:television-guide
+      custom_ui_state_card: state-card-button    #这里使用自定义卡片UI，也可以使用其他的
+      config:
+        gap: 10px                   # 间距（默认为8px）
+        ha_entity_toggle_display: none    # 不显示右边本来的按钮（默认显示）
+        entities:
+          - entity: script.bl_cmcc_hezi_home               #这是我的home按钮
+            icon: mdi:home-outline                         #只要一个图标,其它都默认
+          - entity: script.bl_cmcc_hezi_voljian            #音量-
+            icon: mdi:volume-minus
+          - entity: script.bl_cmcc_hezi_voljia             #音量+ 
+            icon: mdi:volume-plus
+          - entity: script.bl_cmcc_hezi_kaiguan            #电源开关按钮
+            icon: mdi:power
+            color_off: '#E45E65'                           #电源按钮我把他设为红色
+##上面配置为自定义按钮卡片ui，详情请看项目
+##下面开始遥控器UI配置，同示例一
+      custom_ui_more_info: more-info-qinver-tv   ##使用此自定义详情页面
+      entities:               #以下是触控滑动功能的ID
+        menu: script.bl_cmcc_hezi_menu
+        home: script.bl_cmcc_hezi_home
+        back: script.bl_cmcc_hezi_back
+        up: script.bl_cmcc_hezi_shang
+        down: script.bl_cmcc_hezi_xia
+        left: script.bl_cmcc_hezi_zuo
+        right: script.bl_cmcc_hezi_you
+        ok: script.bl_cmcc_hezi_ok
+        buttons:             #除了触控区，你还需要增加的按钮。请一起填写icon
+          - entity: input_boolean.boolean_tvceshi1
+            icon: mdi:skip-previous-circle-outline
+          - entity: input_boolean.boolean_tvceshi2
+            icon: mdi:skip-next-circle-outline
+          - entity: input_boolean.boolean_tvceshi3
+            icon: mdi:format-list-bulleted
+          - entity: input_boolean.boolean_tvceshi4
+            icon: mdi:backup-restore
