@@ -31,7 +31,7 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 如图所示：  
 ![](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E4%BF%9D%E5%AD%98%E5%9C%B0%E5%9D%80.png)  
 2. 在homeassistant配置文件`configuration.yaml`中的对因位置加入以下代码  
-``` yaml
+```yaml
 frontend:
   javascript_version: auto
   extra_html_url:
@@ -44,12 +44,12 @@ frontend:
 ### 同样我写了一个示例:  
 里面包含了两个例子，也有详细的注释，你可以下载此文件，放入到你homeassistant配置文件目录的`~~/packages`文件夹下，然后对照修改    
 如果你之前从未使用过packages文件夹，那么请在配置文件`configuration.yaml`中加入以下代码:  
-``` yaml
+```yaml
 homeassistant:
   packages: !include_dir_named packages 
 ```
 ### 全部配置文件内容  
-``` yaml 
+```yaml 
   customize:
     input_boolean.boolean_tvceshi1:       #假设这是我的电视开关ID
       friendly_name: 电视遥控器1
@@ -77,7 +77,7 @@ homeassistant:
 ## 与其他自定义UI一起使用  
    这个项目是自定义详情页，也就是点击卡片弹出来的页面，那么它可以与其他任何自定义卡片UI一起使用！  
    `以下是一个与我之前制作的[state-card-button](https://github.com/Qinver-china/homeassistant-Custom_UI.state-card-button)（自定义按钮卡片）一起使用的例子：
-``` yaml
+```yaml
   customize:
     input_boolean.boolean_tvceshi2:
       friendly_name: 电视遥控器2
