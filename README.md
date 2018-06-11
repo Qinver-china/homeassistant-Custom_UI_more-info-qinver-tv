@@ -6,12 +6,12 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 因为这样才能一边看电视一边盲操作！  
 所以，我制作了这样的一个UI，可以实现触控滑动来控制你的电视！  
 ## 目录  
-*[更新记录](#更新记录) 
-*[功能介绍](#功能介绍和截图)  
-*[安装](#安装以开始使用)  
-*[配置文件](#编写配置文件)  
-*[混合使用](#与其他自定义UI一起使用)  
-*[与我联系](#与我联系和反馈)  
+* [更新记录](#更新记录)  
+* [功能介绍](#功能介绍和截图)  
+* [安装](#安装以开始使用)  
+* [配置文件](#编写配置文件)  
+* [混合使用](#与其他自定义UI一起使用)  
+* [与我联系](#与我联系和反馈)  
 ## 更新记录  
 2018年6月12日
 > 首次发布，如有疑问，欢迎与我联系！
@@ -23,13 +23,13 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 3. 可以与其他的自定义卡片UI一起使用
 4. 当然你也不一定非要用于电视遥控器，其他用法自行研究
 ```
-![]()   
-![]()   
+![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE1.png)   
+![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE2.png)   
 
 ## 安装以开始使用  
-1. 下载[more-info-qinver-tv.html]()文件放入到你homeassistant配置文件目录的`~~/www/custom_ui`文件夹下  
+1. 下载[more-info-qinver-tv.html](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/www/custom_ui/more-info-qinver-tv.html)文件放入到你homeassistant配置文件目录的`~~/www/custom_ui`文件夹下  
 如图所示：  
-![]()  
+![](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E4%BF%9D%E5%AD%98%E5%9C%B0%E5%9D%80.png)  
 2. 在homeassistant配置文件`configuration.yaml`中的对因位置加入以下代码  
 ``` yaml
 frontend:
@@ -39,10 +39,10 @@ frontend:
   extra_html_url_es5:
     - /local/custom_ui/more-info-qinver-tv.html  
 ```  
-**就这么简单两部，你就可以开始使用了！**  
+**就这么简单两步，你就可以开始使用了！**  
 ## 编写配置文件
-### 同样的我写了一个示例:  
-里面包含了两个例子，也有详细的注释，你可以下载此文件，放入到你homeassistant配置文件目录的`~~/packages`文件夹下  
+### 同样我写了一个示例:  
+里面包含了两个例子，也有详细的注释，你可以下载此文件，放入到你homeassistant配置文件目录的`~~/packages`文件夹下，然后对照修改    
 如果你之前从未使用过packages文件夹，那么请在配置文件`configuration.yaml`中加入以下代码:  
 ``` yaml
 homeassistant:
@@ -73,8 +73,8 @@ homeassistant:
             icon: mdi:format-list-bulleted
           - entity: input_boolean.boolean_tvceshi4
             icon: mdi:backup-restore
-   ```
-   ## 与其他自定义UI一起使用
+   ```  
+## 与其他自定义UI一起使用  
    这个项目是自定义详情页，也就是点击卡片弹出来的页面，那么它可以与其他任何自定义卡片UI一起使用！  
    `以下是一个与我之前制作的[state-card-button](https://github.com/Qinver-china/homeassistant-Custom_UI.state-card-button)（自定义按钮卡片）一起使用的例子：
 ``` yaml
@@ -117,8 +117,11 @@ homeassistant:
             icon: mdi:format-list-bulleted
           - entity: input_boolean.boolean_tvceshi4
             icon: mdi:backup-restore 
-  ```
-  
+  ```  
+## 与我联系和反馈
+欢迎加入[『瀚思彼岸』](https://bbs.hassbian.com)论坛  
+我在论坛中的[其它主题](https://bbs.hassbian.com/home.php?mod=space&uid=645&do=thread&view=me&from=space) ,以及联系方式  
+如果遇到问题请在[这个帖子](https://bbs.hassbian.com/thread-4024-1-1.html)中提交回复  
 
 
 
