@@ -2,9 +2,9 @@
 {
   if (!window.CUSTOM_UI_LIST) window.CUSTOM_UI_LIST = [];
   window.CUSTOM_UI_LIST.push({
-    name: '电视遥控器自定义详情页UI-by:Qinver',
+    name: '电视遥控器自定义详情页UI-by:Qinver 版本',
     url: 'https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv',
-    version: '20180612'
+    version: '20180613'
   });
 }
 </script>
@@ -31,6 +31,7 @@
         color: var(--button-color, var(--primary-text-color));
       }
       #kuang {
+      	position: relative;
         width: 90%;
         height: 260px;
         opacity:0.2;
@@ -39,12 +40,65 @@
         margin: 15px auto;     
         border: 0.1em solid var(--primary-text-color); 
       }
-      #wz,#ts,#ts:hover,#wz:hover {
+      #dzbj {
+       position: absolute;
+       top: 0;
+       right: 0;
+       bottom: 0;
+       left: 0;
+	     margin: auto;
+	     width:10px;
+	     height:10px;
+	     border-radius:50%;
+	     opacity:0;
+      }
+     
+       @keyframes dhzuo{
+      0%  {right:0;width:100px;height:240px;opacity:0; }
+	    50% {right:50px;width:240px;height:200px;opacity:1;background: radial-gradient(circle at right, rgba(110,110,110,0) 60%, rgba(110,110,110,1) 90%);}
+      80% {right:0;width:200px;height:160px;opacity:0;}
+      }
+       @keyframes dhyou{
+      0%  {left:0;width:100px;height:240px;opacity:0; }
+	    50% {left:50px;width:240px;height:200px;opacity:1;background:radial-gradient(circle at left, rgba(110,110,110,0) 60%, rgba(110,110,110,1) 90%);}
+      80% {left:0;width:200px;height:160px;opacity:0;}
+      }
+       @keyframes dhshang{
+      0%  {bottom:0;width:240px;height:80px;opacity:0; }
+      50% {bottom:25px;width:200px;height:220px;opacity:1;background: radial-gradient(circle at bottom, rgba(110,110,110,0) 65%, rgba(110,110,110,1) 90%);}
+      80% {bottom:0;width:160px;height:170px;opacity:0;}
+      }
+       @keyframes dhxia{
+      0%  {top:0;width:240px;height:80px;opacity:0; }
+      50% {top:25px;width:200px;height:220px;opacity:1;background: radial-gradient(circle at top, rgba(110,110,110,0) 65%, rgba(110,110,110,1) 90%);}
+      80% {top:0;width:160px;height:170px;opacity:0;}
+      }
+       @keyframes dhok{
+       0%   {width:30px;height:30px;opacity:0; }
+       60%  {width:100px;height:100px;opacity:1;background:radial-gradient(rgba(110,110,110,0) 50%, rgba(110,110,110,.8) 65%, rgba(110,110,110,1) 70%,rgba(110,110,110,0) 72%);}
+       100% {width:90px;height:90px;opacity:0;}
+      }
+       @keyframes dhhome{
+       0%   {opacity:1;width:260px;height:260px;opacity:0; background:radial-gradient(rgba(110,110,110,0) 22%, rgba(110,110,110,1) 25%,rgba(110,110,110,0) 70%);}
+	   70%  {width:40px;height:40px;opacity:1;background:radial-gradient(rgba(110,110,110,0) 22%, rgba(110,110,110,1) 25%,rgba(110,110,110,0) 70%);}
+	   100% {width:50px;height:50px;opacity:0;}
+      }      
+      @keyframes dhback{
+       0%   {opacity:1;transform: rotate(90deg);transform-origin: 80% 110px;right: 50px;bottom: 140px;background:radial-gradient(circle at right,rgba(110,110,110,0) 50%, rgba(110,110,110,1) 90%);width:90px;height:80px;}
+       90%  {opacity:1;transform: rotate(-200deg);transform-origin: 80% 110px;right: 50px;bottom: 140px;background:radial-gradient(circle at right,rgba(110,110,110,0) 50%, rgba(110,110,110,1) 90%);width:90px;height:80px;}
+       100% {opacity:0;transform: rotate(-200deg);transform-origin: 80% 110px;right: 50px;bottom: 140px;background:radial-gradient(circle at right,rgba(110,110,110,0) 50%, rgba(110,110,110,1) 90%);width:80px;height:80px;}
+      }
+      @keyframes dhmenu{
+       0% {opacity:1;top:180px;bottom: 0;background: linear-gradient(to top, rgba(110,110,110,0) 50%, rgba(110,110,110,1) 95%);width:260px;height:100px;border-radius:10px;}
+       70% {opacity:1;top:0px;bottom: 200px;background:linear-gradient(to top, rgba(110,110,110,0) 50%, rgba(110,110,110,1) 90%);width:260px;height:16px;border-radius:4px;}
+       100% {opacity:0;bottom: 180px;background:linear-gradient(to top, rgba(110,110,110,0) 65%, rgba(110,110,110,1) 90%);width:200px;height:16px;border-radius:2.5px;}
+       }
+      div,div:hover {
         cursor:default;
         -webkit-user-select:none;
         -moz-user-select:none;
         -ms-user-select:none;
-         user-select:none;
+        user-select:none;
       }       
       #wz1 {
         margin-top: 80px;
@@ -71,19 +125,21 @@
     <paper-button-group>
         <template is="dom-repeat" items="[[entities.buttons]]" as="entity">
             <paper-button style$="[[computeTileStyle(hass, entity)]]" on-tap="buttoncall">
-                <iron-icon icon="[[entity.icon]]"></iron-icon>
+                <iron-icon icon="[[computeicon(hass, entity)]]"></iron-icon>
             </paper-button>
         </template>
     </paper-button-group>
 </div>
 <paper-button-group id="quyu" on-track="handleTrack" class='horizontal justified layout'>
     <div id="kuang">
+    	<div id="dzbj" style$='{{dzfk}}'></div>
         <div id="wz">
             <div id="wz1">滑动触控区</div>
             <div id="wz2">轻滑：ok键</div>
             <div id="wz2">中滑：方向键</div>
             <div id="wz2">左长滑：主页键</div>
             <div id="wz2">右长滑：返回键</div>
+            <div id="wz2">上长滑：菜单键</div>            
             <div id="ts">{{c}}</div>
             <div id="ts1">{{d}}</div>
         </div>
@@ -106,58 +162,75 @@
       },
     },
     computeentities: function (stateObj) {
-      return stateObj.attributes.entities;
+      return stateObj.attributes.entities ? stateObj.attributes.entities : '';
     },
     computeTileStyle: function (hass, entity) {
       on = 'color: var(--paper-toggle-button-checked-button-color)'
       off = 'color: var(--primary-text-color)'
-      return (hass.states[entity.entity].state === 'on') ? on : off;
+      state = hass.states[entity.entity].state ? hass.states[entity.entity].state : 'off';
+      return (state == 'on') ? on : off;
+    },
+    computeicon: function (hass, entity) {
+      icon = hass.states[entity.entity].attributes.icon ? hass.states[entity.entity].attributes.icon : 'mdi:remote'
+      return entity.icon ? entity.icon : icon;
     },
       handleTrack: function(e) {
         var entities = this.entities,
-            sb = entities.up ? entities.up : '未设置ID'
-            xb = entities.down ? entities.down : '未设置ID'
-            zb = entities.left ? entities.left : '未设置ID'
-            yb = entities.right ? entities.right : '未设置ID'
-            ob = entities.ok ? entities.ok : '未设置ID'
-            hb = entities.home ? entities.home : '未设置ID'
+            sb = entities.up ? entities.up : '未设置ID',
+            xb = entities.down ? entities.down : '未设置ID',
+            zb = entities.left ? entities.left : '未设置ID',
+            yb = entities.right ? entities.right : '未设置ID',
+            ob = entities.ok ? entities.ok : '未设置ID',
+            hb = entities.home ? entities.home : '未设置ID',
             fb = entities.back ? entities.back : '未设置ID';
+            cb = entities.menu ? entities.menu : '未设置ID';
         switch(e.detail.state) {
+        	case 'start':
+        	this.dzfk = '';
+        	break;
           case 'end':
           var x = e.detail.dx,
-              y = e.detail.dy;
+              y = e.detail.dy,
+              dzfk = 'dzbj',
+              xs = '';
               jd = Math.atan2(x, y) * 180 / Math.PI
         if (Math.abs(x) < 40 && Math.abs(y) < 40) {  
-            fx = ob;xs = 'ok：'+ ob; 
+            fx = ob;xs = 'ok：'+ ob;dzfk = 'animation:dhok .4s;' 
         } else if (Math.abs(x) > 40 || Math.abs(y) > 40) {
         if (jd >= -135 && jd <= -45) {  
-           if (Math.abs(x) < 200) {
-            fx = zb;xs = '左：'+ zb; 
-           } else if (Math.abs(x) > 200) {
-            fx = hb;xs = '主页：'+ hb; 
+           if (Math.abs(x) < 180) {
+            fx = zb;xs = '左：'+ zb;dzfk = 'animation:dhzuo .4s;';
+           } else if (Math.abs(x) > 180) {
+            fx = hb;xs = '主页：'+ hb;dzfk = 'animation:dhhome .6s;';  
            } 
         } else if (jd > 45 && jd < 135) {  
-           if (Math.abs(x) < 200) {
-            fx = yb;xs = '右：'+ yb; 
-           } else if (Math.abs(x) > 200) {
-            fx = fb;xs = '返回：'+ fb; 
+           if (Math.abs(x) < 180) {
+            fx = yb;xs = '右：'+ yb;dzfk = 'animation:dhyou .4s;'; 
+           } else if (Math.abs(x) > 180) {
+            fx = fb;xs = '返回：'+ fb;dzfk = 'animation:dhback .6s;';  
            }          
-        } else if ((jd >= 135 && jd <= 180) || (jd >= -180 && jd < -135)) {  
-            fx = sb;xs = '上：'+ sb; 
+        } else if ((jd >= 135 && jd <= 180) || (jd >= -180 && jd < -135)) { 
+           if (Math.abs(y) < 180) {
+            fx = sb;xs = '上：'+ sb;dzfk = 'animation:dhshang .4s;'; 
+           } else if (Math.abs(y) > 180) {
+            fx = cb;xs = '菜单：'+ cb;dzfk = 'animation:dhmenu .4s;';  
+           }         	
         } else if (jd >= -45 && jd <= 45) {  
-            fx = xb;xs = '下：'+ xb;   
+            fx = xb;xs = '下：'+ xb;dzfk = 'animation:dhxia .4s;';   
         }}
-      this.updateStyles({
-        '--ts-opacity': '0',
-      });
+          this.updateStyles({
+            '--ts-opacity': '0',
+          });
        /*   this.c = Math.abs(x) + ' / ' + Math.abs(y);  */
+          this.dzfk = dzfk;
           this.d = xs;
           if (fx != '未设置ID') {
-          this.callService(fx)
-        }
+            this.callService(fx)
+          }
             break;
         };
       },
+
     buttoncall: function (e){
         var id = e.model.entity.entity;
         this.callService(id)
