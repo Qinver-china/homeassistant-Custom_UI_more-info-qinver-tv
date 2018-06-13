@@ -1,4 +1,4 @@
-# homeassistant-Custom_UI_more-info-qinver-tv
+# Homeassistant-Custom_UI_more-info-qinver-tv
 homeassistant电视遥控器的自定义详情页。Homeassistant TV remote custom details page.
 > homeassistant接入电视之后，能操作的功能不多，但是我们往往又接入了遥控器的全部功能，比如通过博联或者小米红外等。  
 但是基于ha的操作方式，几乎不能当遥控器用！ 你想想，每一个按键都是一个开关，操作是很困难的！  
@@ -13,7 +13,7 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 * [混合使用](#与其他自定义ui一起使用)  
 * [与我联系](#与我联系和反馈)  
 ## 更新记录 
-#### 更新Custom_UI文件一定要清楚浏览器缓存! 一定要清楚浏览器缓存!  
+#### 更新Custom_UI文件一定要清除浏览器缓存! 一定要清除浏览器缓存!  
 2018年6月13日
 1. 增加了滑动时候的反馈动画
 2. 增加长上滑为菜单键按钮
@@ -25,10 +25,11 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 ## 功能介绍和截图
 ```  
 你可以在任何一个卡片上使用此自定义电视详情页，当点击卡片之后就会弹出这个遥控器UI  
-1. 通过触摸滑动控制遥控器上下左右/返回/主页的功能  
-2. 可以增加你需要的其他按钮
-3. 可以与其他的自定义卡片UI一起使用
-4. 当然你也不一定非要用于电视遥控器，其他用法自行研究
+1. 通过触摸滑动控制遥控器上下左右/返回/主页的功能
+2. 每一个滑动动作均有动画反馈
+3. 可以增加你需要的其他按钮
+4. 可以与其他的自定义卡片UI一起使用
+5. 当然你也不一定非要用于电视遥控器，其他用法自行研究
 ```
 ![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE1.png)   
 ![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE2.png)   
