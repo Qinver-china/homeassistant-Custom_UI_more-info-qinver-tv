@@ -171,7 +171,6 @@
     },
     cpids: function (stateObj) {
       return stateObj.attributes.entities ? stateObj.attributes.entities : '';
-      console.log(stateObj);
     },
     cpTS: function (hass, entity) {
       on = 'color: var(--paper-toggle-button-checked-button-color)'
@@ -244,7 +243,7 @@
           this.updateStyles({
             '--ts-opacity': '0',
           });
-          this.c = Math.abs(x) + ' / ' + Math.abs(y);  
+       /*   this.c = Math.abs(x) + ' / ' + Math.abs(y);  */
           this.dzfk = dzfk;
           this.d = xs;
           if (fx != '未设置ID') {
@@ -258,7 +257,7 @@
         var id = e.model.entity.entity;
         this.callService(id)
     },
-    callService: function (ev) {
+    callService: function (ev,stateObj) {
       var entity = ev;
       var domain = entity.split('.')[0];
       if (domain === 'script') {
