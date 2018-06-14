@@ -11,9 +11,13 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 * [安装](#安装以开始使用)  
 * [配置文件](#编写配置文件)  
 * [混合使用](#与其他自定义ui一起使用)  
+* [与media_player组件一起使用](#与media_player组件一起使用)
 * [与我联系](#与我联系和反馈)  
 ## 更新记录 
 #### 更新Custom_UI文件一定要清除浏览器缓存! 一定要清除浏览器缓存!  
+2018年6月14日  
+适配media_player组件,可以选择[显示media_player原按钮](#与media_player组件一起使用)
+
 2018年6月13日
 1. 增加了滑动时候的反馈动画
 2. 增加长上滑为菜单键按钮
@@ -30,6 +34,7 @@ homeassistant电视遥控器的自定义详情页。Homeassistant TV remote cust
 3. 可以增加你需要的其他按钮
 4. 可以与其他的自定义卡片UI一起使用
 5. 当然你也不一定非要用于电视遥控器，其他用法自行研究
+6. 与media_player组件一起使用,可选择显示原按钮
 ```
 ![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE1.png)   
 ![效果图](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/%E6%95%88%E6%9E%9C%E5%9B%BE2.png)   
@@ -126,6 +131,29 @@ homeassistant:
           - entity: input_boolean.boolean_tvceshi4
             icon: mdi:backup-restore 
   ```  
+## 与media_player组件一起使用  
+对于遥控器本来的初衷就是为了控制媒体设备,现在可以与与`media_player`组件完美配合了  
+如果你需要显示`media_player`组件详情页中原本的按钮,请在配置文件中加入:  
+`media_player_display: yes`  
+代码示例:  
+```yaml
+  customize:
+    media_player.kodi:     #一个media_player组件
+      custom_ui_more_info: more-info-qinver-tv   ##使用此自定义详情页面
+      media_player_display: yes     #显示media_player的原按钮,仅适用于media_player组件.默认为no,不显示
+      entities:               #以下是触控滑动功能的ID
+        menu: script.bl_cmcc_hezi_menu
+        home: script.bl_cmcc_hezi_home
+        back: script.bl_cmcc_hezi_back
+        up: script.bl_cmcc_hezi_shang
+        down: script.bl_cmcc_hezi_xia
+        left: script.bl_cmcc_hezi_zuo
+        right: script.bl_cmcc_hezi_you
+        ok: script.bl_cmcc_hezi_ok
+```
+注意:仅适用于media_player组件.默认为no,不显示  
+效果图:  
+![](https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv/blob/master/Screenshots/media_player%E7%BB%84%E4%BB%B6%E6%95%88%E6%9E%9C.jpg)
 ## 与我联系和反馈
 欢迎加入[『瀚思彼岸』](https://bbs.hassbian.com)论坛  
 我在论坛中的[其它主题](https://bbs.hassbian.com/home.php?mod=space&uid=645&do=thread&view=me&from=space) ,以及联系方式  
