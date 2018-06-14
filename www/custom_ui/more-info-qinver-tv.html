@@ -1,13 +1,11 @@
-<script>
-{
+<script>{
   if (!window.CUSTOM_UI_LIST) window.CUSTOM_UI_LIST = [];
   window.CUSTOM_UI_LIST.push({
-    name: '电视遥控器自定义详情页UI-by:Qinver 版本',
+    name: '电视遥控器自定义详情页UI-by:Qinver',
     url: 'https://github.com/Qinver-china/homeassistant-Custom_UI_more-info-qinver-tv',
-    version: '20180613'
+    version: '20180614'
   });
-}
-</script>
+}</script>
 <dom-module id="more-info-qinver-tv"><template>
 <style is="custom-style" include="iron-flex iron-flex-alignment">
 </style>
@@ -34,7 +32,7 @@
       	position: relative;
         width: 90%;
         height: 260px;
-        opacity:0.2;
+        opacity:.2;
         text-align: center;
         border-radius:15px;
         margin: 15px auto;     
@@ -46,11 +44,11 @@
        right: 0;
        bottom: 0;
        left: 0;
-	     margin: auto;
-	     width:10px;
-	     height:10px;
-	     border-radius:50%;
-	     opacity:0;
+	   margin: auto;
+	   width:10px;
+	   height:10px;
+	   border-radius:50%;
+	   opacity:0;
       }
      
        @keyframes dhzuo{
@@ -113,27 +111,37 @@
         transition: 5s;
       }
       #ts,#ts1 {
+      	position: absolute;
+      	top:4px;
+      	left:0;
+      	right:0;
         opacity: var(--ts-opacity);
         transition: 20s;
       }
       #ts {
-        margin-top: 20px;
+      	top:20px;
         font-size: 12px;
+      }
+      #media {
+       margin:auto;
+       padding:10px 15px;
+       margin-top: -121.43px;
       }
 </style>
 <div class='horizontal justified layout button-groupa'>
     <paper-button-group>
         <template is="dom-repeat" items="[[entities.buttons]]" as="entity">
-            <paper-button style$="[[computeTileStyle(hass, entity)]]" on-tap="buttoncall">
-                <iron-icon icon="[[computeicon(hass, entity)]]"></iron-icon>
+            <paper-button style$="[[cpTS(hass, entity)]]" on-tap="bcall">
+                <iron-icon icon="[[cpti(hass, entity)]]"></iron-icon>
             </paper-button>
         </template>
     </paper-button-group>
 </div>
-<paper-button-group id="quyu" on-track="handleTrack" class='horizontal justified layout'>
+<paper-button-group id="quyu" on-track="ttk" class='horizontal justified layout'>
     <div id="kuang">
     	<div id="dzbj" style$='{{dzfk}}'></div>
         <div id="wz">
+        	<div id="ts1">{{d}}</div>
             <div id="wz1">滑动触控区</div>
             <div id="wz2">轻滑：ok键</div>
             <div id="wz2">中滑：方向键</div>
@@ -141,10 +149,10 @@
             <div id="wz2">右长滑：返回键</div>
             <div id="wz2">上长滑：菜单键</div>            
             <div id="ts">{{c}}</div>
-            <div id="ts1">{{d}}</div>
         </div>
     </div>
 </paper-button-group>
+<more-info-media_player class='horizontal justified layout' style$="[[cpmdS(hass, stateObj)]]" id="media" state-obj="[[stateObj]]" hass="[[hass]]"></more-info-media_player>
 </template></dom-module>
 <script>
   Polymer({
@@ -158,23 +166,38 @@
       },  
       entities: {
         type: Object,
-        computed: 'computeentities(stateObj)',
+        computed: 'cpids(stateObj)',
       },
     },
-    computeentities: function (stateObj) {
+    cpids: function (stateObj) {
       return stateObj.attributes.entities ? stateObj.attributes.entities : '';
+      console.log(stateObj);
     },
-    computeTileStyle: function (hass, entity) {
+    cpTS: function (hass, entity) {
       on = 'color: var(--paper-toggle-button-checked-button-color)'
       off = 'color: var(--primary-text-color)'
       state = hass.states[entity.entity].state ? hass.states[entity.entity].state : 'off';
       return (state == 'on') ? on : off;
     },
-    computeicon: function (hass, entity) {
+    cpmdS: function (hass, stateObj) {
+      md = stateObj.attributes.media_player_display ? stateObj.attributes.media_player_display : 'no';
+      id = stateObj.entity_id;
+      st = hass.states[id].state ? hass.states[id].state : 'off';
+      var tcpt = id.split('.')[0];
+      if ((tcpt == 'media_player')&&(md == true)){
+        if (st == 'idle'){
+        return 'display:block;margin-top: -81.43px;';
+        } else if (st != 'off'){
+        return 'display:block';
+        }
+      }
+      return 'display:none';
+    },
+    cpti: function (hass, entity) {
       icon = hass.states[entity.entity].attributes.icon ? hass.states[entity.entity].attributes.icon : 'mdi:remote'
       return entity.icon ? entity.icon : icon;
     },
-      handleTrack: function(e) {
+      ttk: function(e) {
         var entities = this.entities,
             sb = entities.up ? entities.up : '未设置ID',
             xb = entities.down ? entities.down : '未设置ID',
@@ -221,7 +244,7 @@
           this.updateStyles({
             '--ts-opacity': '0',
           });
-       /*   this.c = Math.abs(x) + ' / ' + Math.abs(y);  */
+          this.c = Math.abs(x) + ' / ' + Math.abs(y);  
           this.dzfk = dzfk;
           this.d = xs;
           if (fx != '未设置ID') {
@@ -231,7 +254,7 @@
         };
       },
 
-    buttoncall: function (e){
+    bcall: function (e){
         var id = e.model.entity.entity;
         this.callService(id)
     },
