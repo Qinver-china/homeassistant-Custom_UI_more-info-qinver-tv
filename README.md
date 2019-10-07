@@ -1,4 +1,9 @@
-# Homeassistant-Custom_UI_more-info-qinver-tv
+
+
+
+# 以下内容将不再更新！请替换新版的[lovelace-card-touchpad](https://github.com/Qinver-china/lovelace-card-touchpad)   
+
+## Homeassistant-Custom_UI_more-info-qinver-tv
 homeassistant电视遥控器的自定义详情页。Homeassistant TV remote custom details page.
 > homeassistant接入电视之后，能操作的功能不多，但是我们往往又接入了遥控器的全部功能，比如通过博联或者小米红外等。  
 但是基于ha的操作方式，几乎不能当遥控器用！ 你想想，每一个按键都是一个开关，操作是很困难的！  
