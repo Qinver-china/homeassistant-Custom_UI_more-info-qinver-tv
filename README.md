@@ -1,7 +1,7 @@
 
 
 
-# 以下内容将不再更新！请替换新版的[lovelace-card-touchpad](https://github.com/Qinver-china/lovelace-card-touchpad)   
+# 以下内容将不再更新！请使用新版的[lovelace-card-touchpad](https://github.com/Qinver-china/lovelace-card-touchpad)   
 
 ## Homeassistant-Custom_UI_more-info-qinver-tv
 homeassistant电视遥控器的自定义详情页。Homeassistant TV remote custom details page.
